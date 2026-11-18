@@ -1,0 +1,13 @@
+# Go build output
+/todoui
+/dist/
+
+# Local todo data (if TODOUI_FILE points into the repo)
+*.json
+*.tmp
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store

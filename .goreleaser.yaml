@@ -1,0 +1,33 @@
+version: 2
+
+project_name: todoui
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos: [linux, darwin]
+    goarch: [amd64, arm64]
+    ldflags:
+      - -s -w -X main.version={{.Version}}
+
+archives:
+  - formats: [tar.gz]
+    files:
+      - README.md
+
+checksum:
+  name_template: checksums.txt
+
+nfpms:
+  - package_name: todoui
+    homepage: https://github.com/skyler-v1dot0/todoui
+    description: Simple todo TUI.
+    maintainer: skyler-v1dot0 <https://github.com/skyler-v1dot0>
+    formats: [deb, rpm]
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
