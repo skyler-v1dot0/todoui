@@ -2,11 +2,11 @@
 
 Features to check back on:
 
-- [ ] Multiple lists (create, switch between, rename, delete lists)
-- [ ] Undo completions (un-check a completed item)
-- [ ] Set priority on an item
-- [ ] Color items based on priority
-- [ ] Auto-order the list by priority
+- [x] Multiple lists (create, switch between, rename, delete lists)
+- [x] Undo completions (un-check a completed item: `space` toggles)
+- [x] Set priority on an item
+- [x] Color items based on priority
+- [x] Auto-order the list by priority (`s` to sort)
 
 ## CI / Release
 

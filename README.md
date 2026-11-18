@@ -11,18 +11,20 @@
 
 # todoui
 
-A small, fast todo TUI: add items, check them off, and reorder them, all from the keyboard.
+A small, fast todo TUI: keep several lists, add items, set priorities, check them off, and reorder them, all from the keyboard.
 
 ```text
-┌─────────────────────────────────────────────────────────────┐
-│ todoui  (1/3 done)                                          │
-│                                                             │
-│ ▶[ ] write code                                             │
-│  [x] buy milk                                               │
-│  [ ] walk dog                                               │
-│                                                             │
-│ a:add  space:complete  J/K:move  d:delete  j/k:nav  q:quit  │
-└─────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────────────────┐
+│ [ Work ]  2/4 done  Home  Groceries                                       │
+│                                                                           │
+│ ▶[ ] fix login bug        (high, red)                                     │
+│  [ ] write docs           (medium, yellow)                                │
+│  [ ] call mom                                                             │
+│  [x] tidy desk            (low, blue)                                     │
+│                                                                           │
+│ a:add  space:toggle  1/2/3/0:priority  s:sort  J/K:move  d:delete  q:quit │
+│ tab/shift+tab:switch list  n:new list  r:rename list  D:delete list       │
+└───────────────────────────────────────────────────────────────────────────┘
 ```
 
 ## Install
@@ -57,21 +59,38 @@ go build
 ./todoui
 ```
 
-Items are saved to `~/.local/share/todoui/todos.json` (respects `XDG_DATA_HOME`).
-Set `TODOUI_FILE` to use a different file.
+All lists are saved to `~/.local/share/todoui/todos.json` (respects `XDG_DATA_HOME`).
+Set `TODOUI_FILE` to use a different file. A file from v0.1.0 (a single list) is
+upgraded automatically and opens as a list named "Todo".
 
 ## Keys
 
-| Key                      | Action                       |
-| ------------------------ | ---------------------------- |
-| `a`                      | Add an item below the cursor |
-| `space` / `x` / `enter`  | Mark the item complete       |
-| `j` / `k` / arrows       | Move the cursor              |
-| `J` / `K` / shift+arrows | Move the item down / up      |
-| `g` / `G`                | Jump to top / bottom         |
-| `d`                      | Delete the item              |
-| `q`                      | Quit                         |
+| Key                      | Action                                                 |
+| ------------------------ | ------------------------------------------------------ |
+| **Items**                |                                                        |
+| `a`                      | Add an item below the cursor                           |
+| `space` / `x` / `enter`  | Toggle the item complete / not complete                |
+| `j` / `k` / arrows       | Move the cursor                                        |
+| `1` / `2` / `3`          | Set priority high / medium / low (red / yellow / blue) |
+| `0`                      | Clear priority                                         |
+| `s`                      | Sort by priority (high → low → none, completed last)   |
+| `J` / `K` / shift+arrows | Move the item down / up                                |
+| `g` / `G`                | Jump to top / bottom                                   |
+| `d`                      | Delete the item                                        |
+| **Lists**                |                                                        |
+| `tab` / `l` / →          | Next list                                              |
+| `shift+tab` / `h` / ←    | Previous list                                          |
+| `n`                      | New list                                               |
+| `r`                      | Rename the current list                                |
+| `D`                      | Delete the current list (asks to confirm)              |
+| `q`                      | Quit                                                   |
 
 When adding, `enter` saves and `esc` cancels.
+
+Sorting is stable: items with the same priority keep the order you gave them,
+and you can still move items with `J` / `K` afterwards.
+
+Each list remembers its own cursor while the app is open, and todoui reopens on
+the list you were last viewing. The last remaining list can't be deleted.
 
 See [TODO.md](TODO.md) for planned features.

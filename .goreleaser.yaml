@@ -27,6 +27,7 @@ nfpms:
 
 changelog:
   sort: asc
+  abbrev: 7
   filters:
     exclude:
       - "^docs:"
